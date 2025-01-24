@@ -7,7 +7,11 @@ mod config; use config::CONFIG;
 #[tokio::main]
 pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
-    let listener = TcpListener::bind("127.0.0.1:8080").await?;
+    let listener = TcpListener::bind(&CONFIG.bind_addr).await?;
+
+    if CONFIG.verbose {
+        eprintln!("Listening on {}", &CONFIG.bind_addr);
+    }
 
     loop {
         let (mut socket, addr) = listener.accept().await?;
