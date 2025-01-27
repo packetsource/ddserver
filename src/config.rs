@@ -38,7 +38,7 @@ impl Default for Config {
 }
 impl Config {
     pub fn usage() {
-        eprintln!("Usage: ddserver [-v] [-d data-dir]");
+        eprintln!("Usage: ddserver [-v] [-d data-dir] [-l listen address]");
         process::exit(1);
     }
 
@@ -66,6 +66,10 @@ impl Config {
                         args.next()
                             .expect("expected address to listen on, eg. 0.0.0.0:8001");
                     continue;
+                },
+                "-h" => {
+                    Self::usage();
+                    break;
                 }
                 _ => {
                     a

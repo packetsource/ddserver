@@ -10,6 +10,7 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind(&CONFIG.bind_addr).await?;
 
     if CONFIG.verbose {
+        println!("{:?}", &*CONFIG);
         eprintln!("Listening on {}", &CONFIG.bind_addr);
     }
 
